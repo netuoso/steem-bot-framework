@@ -1,0 +1,18 @@
+{
+  "name": "STEEM Bot Framework",
+  "description": "A STEEM bot framework supporting multiples users/bots/admins.",
+  "repository": "https://github.com/netuoso/steem-bot-framework",
+  "logo": "https://steembotframework.herokuapp.com/logo.jpeg",
+  "keywords": ["steem", "steemit", "programming", "ruby", "steembotframework", "steem bot", "cryptocurrency"],
+  "env": {
+    "SECRET_TOKEN": {
+      "description": "A secret key for verifying the integrity of signed cookies.",
+      "generator": "secret"
+    },
+    "RAILS_ENV": "production",
+    "SMTP_ADDRESS":"smtp.example.com",
+    "SMTP_DOMAIN":"example.com",
+    "SMTP_USER":"support",
+    "SMTP_PASSWORD":"password"
+  }
+}

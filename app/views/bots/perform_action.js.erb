@@ -1,0 +1,10 @@
+if (<%= @success %>) {
+	$('#steemd-response-text')[0].innerHTML = "<%= @bot_response %>";er
+	$('#steemd-error-text')[0].innerHTML = "";
+	$('#steemd-error')[0].style = 'display: none;';
+} else {
+	$('#steemd-response-text')[0].innerHTML = "<%= @bot_response %>";
+	$('#steemd-error-text')[0].innerHTML = "<%= @error_backtrace %>";
+	$('#steemd-error')[0].style = 'display: block;';
+}
+$('#steemd-response-container')[0].style = 'display: block;'

@@ -1,0 +1,153 @@
+<div class="container">
+	<%= form_tag("/perform_action", method: :post, enforce_utf8: false, remote: false) do %>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-xs-12">
+        <div class="input-group">
+          <span class="input-group-addon" id="steemit-url-addon">#</span>
+          <%= text_field_tag :steemit_url, nil, class: "form-control", id: "steemit-url", placeholder: "paste entire https://steemit.com url here and click parse", tabindex: 1 %>
+          <span class="input-group-btn" id="steemit-url-addon">
+            <%= button_tag :parse, id: :parse_url, class: "btn btn-default btn-warning", type: "button" %>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bot_action" class="col-md-4 control-label">bot_action:</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-addon" id="bot_action-addon">!</span>
+              <%= select_tag :bot_action, options_for_select(@permitted_actions, @permitted_actions.empty? ? '' : 'vote'), class: "form-control", id: "bot_action", placeholder: "vote", tabindex: 2,  'aria-describedby': "bot_action-addon", disabled: @permitted_actions.empty? %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bot" class="col-md-4 control-label">bot:</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-addon" id="bot-addon">@</span>
+              <%= select_tag :bots, options_for_select(@permitted_bots, @permitted_bots.empty? ? '' : 'minnowsupport'), class: "form-control", id: "bots", placeholder: "minnowsupport", tabindex: 3,  'aria-describedby': "bots-addon", disabled: @permitted_bots.empty?, name: 'bots[]', multiple: 'multiple' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="permlink" class="col-md-4 control-label">permlink:</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-addon" id="permlink-addon">#</span>
+              <%= text_field_tag :permlink, nil, class: "form-control", id: "permlink", placeholder: "permlink", required: true, tabindex: 4 %>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="author" class="col-md-4 control-label">author:</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-addon" id="author-addon">@</span>
+              <%= text_field_tag :author, nil, class: "form-control", id: "author", placeholder: "username", tabindex: 5 %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" style="margin-bottom: 20px;">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="power" class="col-md-4 control-label">power:</label>
+          <div class="col-md-8">
+	          <div class="input-group">
+		          <span class="input-group-addon" id="power-addon">%</span>
+		          <%= number_field_tag :power, nil, class: "form-control", id: "power", placeholder: "1-#{current_user.admin? ? 100 : 20}", tabindex: 6, min: 0, max: current_user.admin? ? 100 : 20, :step => 0.1 %>
+	          </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="tags" class="col-md-4 control-label">tags:</label>
+          <div class="col-md-8">
+            <div class="input-group">
+              <span class="input-group-addon" id="tags-addon">...</span>
+              <%= text_field_tag :tags, nil, class: "form-control", id: "tags", placeholder: "tag1,tag2,tag3,tag4,tag5", tabindex: 7 %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="post-comment-fields">
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="title" class="col-md-4 control-label">title:</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="title-addon">...</span>
+                <%= text_field_tag :title, nil, class: "form-control", id: "title", placeholder: "title", tabindex: 8 %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="body" class="col-md-4 control-label">body:</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="body-addon">...</span>
+                <%= text_area_tag :body, nil, class: "form-control", id: "body", placeholder: "body", tabindex: 9 %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-bottom: 20px;">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="parent_permlink" class="col-md-4 control-label">parent_permlink:</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="parent_permlink-addon">#</span>
+                <%= text_field_tag :parent_permlink, nil, class: "form-control", id: "parent_permlink", placeholder: "required when replying", tabindex: 10 %>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="parent_author" class="col-md-4 control-label">parent_author:</label>
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon" id="parent_author-addon">@</span>
+                <%= text_field_tag :parent_author, nil, class: "form-control", id: "parent_author", placeholder: "required when replying", min: 1, max: 100, tabindex: 11 %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br />
+    <div class="form-group row text-center">
+      <div class="col-sm-12">
+	      <%= submit_tag "Submit", class: "btn btn-primary btn-lg", disabled: (@permitted_actions.empty? || @permitted_bots.empty?), tabindex: 12  %>
+      </div>
+    </div>
+	<% end %>
+</div>
+
+<div id="steemd-response-container" class="container jumbotron text-center col-xs-12" style="display:none;">
+  <div class="row">
+    <h2 style="margin-top: 0px;">Steemd Response:</h2>
+  </div>
+  <div class="row" style="overflow-x: hidden;">
+    <p id="steemd-response">Response: <span id="steemd-response-text"></span></p>
+    <p id="steemd-error" style="display: none;">Backtrace: <span id="steemd-error-text"></span></p>
+  </div>
+</div>
