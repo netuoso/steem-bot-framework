@@ -52,6 +52,12 @@
 ### Admin Interface
 - `http://localhost:3000/admin`
 
+### Screenshots
+- Bot Interface
+![](https://i.imgur.com/gN5YVpq.png)
+- Admin Interface
+![](https://i.imgur.com/5Rxp509.png)
+
 ### How to Regenerate SSL Certificate:
 - `bundle exec rails sbf:create_certs`
 - answer `yes` if replacing old certificate with new
