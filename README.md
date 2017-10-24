@@ -34,6 +34,14 @@
 - user: `admin`
 - password: `welcomeadmin`
 
+### Quickstart Guide
+- Click 'Deploy to Heroku' at the top of this Repo
+- Log into your Heroku account
+- Name your application
+- Customize the environment variables
+- Login with user: `admin`, password: `welcomeadmin`
+- Go to https://your-app-name.herokuapp.com/admin and be sure to change your admin user's password
+
 ### Getting Started with Development
 - `git clone https://github.com/netuoso/steem-bot-framework`
 - `cd steem-bot-framework`
