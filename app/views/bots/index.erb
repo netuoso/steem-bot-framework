@@ -29,7 +29,7 @@
           <div class="col-md-8">
             <div class="input-group">
               <span class="input-group-addon" id="bot-addon">@</span>
-              <%= select_tag :bots, options_for_select(@permitted_bots, @permitted_bots.empty? ? '' : 'minnowsupport'), class: "form-control", id: "bots", placeholder: "minnowsupport", tabindex: 3,  'aria-describedby': "bots-addon", disabled: @permitted_bots.empty?, name: 'bots[]', multiple: 'multiple' %>
+              <%= select_tag :bots, options_for_select(@permitted_bots, @permitted_bots.empty? ? '' : 'bot1'), class: "form-control", id: "bots", placeholder: "bot1", tabindex: 3,  'aria-describedby': "bots-addon", disabled: @permitted_bots.empty?, name: 'bots[]', multiple: 'multiple' %>
             </div>
           </div>
         </div>

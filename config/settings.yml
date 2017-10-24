@@ -1,10 +1,10 @@
 # Application Settings
-framework_name: 'Framework Name' # String: Framework name used in comment titles and json_metadata
-community_name: 'Community Name' # String: Community name added to json_metadata
-framework_beneficiary_enabled: false # Boolean: If enabled will add beneficiary to attribution comments
-framework_beneficiary: '' # String: Beneficiary account added to attribution comments
-default_posting_tags: ['steem-bot-framework','made-by-netuoso'] # Array of strings: Default tags will be set or appended to comments/posts
+framework_name: <%= ENV['FRAMEWORK_NAME'] || 'Framework Name' %> # String: Framework name used in comment titles and json_metadata
+community_name: <%= ENV['COMMUNITY_NAME'] || 'Community Name' %> # String: Community name added to json_metadata
+framework_beneficiary_enabled: <%= ENV['FRAMEWORK_BENEFICIARY_ENABLED'] || 'false' %> # Boolean: If enabled will add beneficiary to attribution comments
+framework_beneficiary: <%= ENV['FRAMEWORK_BENEFICIARY'] || 'netuoso' %> # String: Beneficiary account added to attribution comments
+default_posting_tags: <%= ENV['DEFAULT_POSTING_TAGS'] || 'steem-bot-framework,made-by-netuoso' %> # String: Default tags will be set or appended to comments/posts
 
 # Steemd Settings
-primary_steemd_node: https://steemd.steemit.com
-secondary_steemd_node: https://rpc.steemliberator.com
+primary_steemd_node: <%= ENV['PRIMARY_STEEMD_NODE'] || 'https://steemd.steemit.com' %>
+secondary_steemd_node: <%= ENV['SECONDARY_STEEMD_NODE'] || 'https://rpc.steemliberator.com' %>

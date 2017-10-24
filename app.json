@@ -4,15 +4,26 @@
   "repository": "https://github.com/netuoso/steem-bot-framework",
   "logo": "https://steembotframework.herokuapp.com/logo.jpeg",
   "keywords": ["steem", "steemit", "programming", "ruby", "steembotframework", "steem bot", "cryptocurrency"],
+  "success_url": "/",
+  "scripts": {
+    "postdeploy": "bundle exec rails sbf:setup"
+  },
   "env": {
     "SECRET_TOKEN": {
       "description": "A secret key for verifying the integrity of signed cookies.",
       "generator": "secret"
     },
     "RAILS_ENV": "production",
-    "SMTP_ADDRESS":"smtp.example.com",
-    "SMTP_DOMAIN":"example.com",
-    "SMTP_USER":"support",
-    "SMTP_PASSWORD":"password"
+    "SMTP_ADDRESS": "smtp.example.com",
+    "SMTP_DOMAIN": "example.com",
+    "SMTP_USER": "support",
+    "SMTP_PASSWORD": "password",
+    "FRAMEWORK_NAME": "Framework Name",
+    "COMMUNITY_NAME": "Community Name",
+    "FRAMEWORK_BENEFICIARY_ENABLED": "false",
+    "FRAMEWORK_BENEFICIARY": "netuoso",
+    "DEFAULT_POSTING_TAGS": "steem-bot-framework,made-by-netuoso",
+    "PRIMARY_STEEMD_NODE": "https://steemd.steemit.com",
+    "SECONDARY_STEEMD_NODE": "https://rpc.steemliberator.com"
   }
 }

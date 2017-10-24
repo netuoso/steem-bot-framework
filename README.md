@@ -3,8 +3,9 @@
 # STEEM Bot Framework
 
 ### Author
-[@netuoso Github](https://github.com/@netuoso)
-[@netuoso SteemIt](https://steemit.com/@netuoso)
+- [Github](https://github.com/@netuoso)
+- [SteemIt](https://steemit.com/@netuoso)
+- [Twitter](https://twitter.com/@netuoso)
 
 ### Features
 - Default tags

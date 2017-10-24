@@ -65,7 +65,7 @@ class Bot < ApplicationRecord
     tx = Radiator::Transaction.new(url: Settings.primary_steemd_node, wif: self.decrypted_posting_key)
     reblog_tx = generate_reblog_tx(options.fetch(:author), options.fetch(:permlink))
 
-    framework_attribution_text = "This post has been resteemed by @#{self.username} courtesy of @#{options.fetch(:app_user)} from the Minnow Support Project ( @minnowsupport ). [Join us in Discord](https://discord.gg/tuJsjYk).\n\nUpvoting this comment will help support @minnowsupport."
+    framework_attribution_text = "This post has been resteemed by @#{self.username} courtesy of #{Settings.framework_name}."
 
     attribution_comment_tx = generate_comment_tx(
                               self.username,
@@ -163,7 +163,7 @@ class Bot < ApplicationRecord
   def framework_attribution(tags=[])
     {
       json_metadata: {
-        tags: tags&.class == Array ? tags.append(Settings.default_posting_tags) : Settings.default_posting_tags,
+        tags: tags&.class == Array ? tags.append(Settings.default_posting_tags.split(',')) : Settings.default_posting_tags.split(','),
         app: "#{Settings.framework_name}",
         format: 'markdown+html',
         community: "#{Settings.community_name}"
