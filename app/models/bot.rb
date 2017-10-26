@@ -3,6 +3,7 @@ class Bot < ApplicationRecord
 
   scope :has_posting_key, lambda { where('posting_key is not NULL') }
   before_save :encrypt_posting_key, if: -> (record) { record.posting_key.present? && record.posting_key.length < 52 }
+  after_create :create_premissions
 
   def name
     self.username
@@ -98,6 +99,13 @@ class Bot < ApplicationRecord
   end
 
   private
+
+  # Create Bot Permissions
+  def create_premissions
+    %w(vote comment resteem).each do |action|
+      self.permissions.find_or_create_by(action: action)
+    end
+  end
 
   # Posting Key Security
   def encrypt_posting_key
