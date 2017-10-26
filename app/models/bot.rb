@@ -1,6 +1,5 @@
 class Bot < ApplicationRecord
   has_many :permissions
-  has_many :documents
 
   scope :has_posting_key, lambda { where('posting_key is not NULL') }
   before_save :encrypt_posting_key, if: -> (record) { record.posting_key.present? && record.posting_key.length < 52 }

@@ -3,18 +3,28 @@ require 'base64'
 
 class SslService
   def self.encrypt(data)
-    public_key_file = Rails.root + 'ssl/key.pub';
-
-    public_key = OpenSSL::PKey::RSA.new(File.read(public_key_file))
-    encrypted_string = Base64.encode64(public_key.public_encrypt(data))
+    Base64.encode64(data.encrypt(ENV['SECRET_KEY_BASE']))
   end
 
   def self.decrypt(data)
-    private_key_file = Rails.root + 'ssl/key.pem';
+    Base64.decode64(data).decrypt(ENV['SECRET_KEY_BASE'])
+  end
+end
 
-    encrypted_string = %Q{#{data}}
+class String
+  def encrypt(key)
+    cipher = OpenSSL::Cipher::Cipher.new('DES-EDE3-CBC').encrypt
+    cipher.key = Digest::SHA1.hexdigest key
+    s = cipher.update(self) + cipher.final
 
-    private_key = OpenSSL::PKey::RSA.new(File.read(private_key_file))
-    string = private_key.private_decrypt(Base64.decode64(encrypted_string))
+    s.unpack('H*')[0].upcase
+  end
+
+  def decrypt(key)
+    cipher = OpenSSL::Cipher::Cipher.new('DES-EDE3-CBC').decrypt
+    cipher.key = Digest::SHA1.hexdigest key
+    s = [self].pack("H*").unpack("C*").pack("c*")
+
+    cipher.update(s) + cipher.final
   end
 end
